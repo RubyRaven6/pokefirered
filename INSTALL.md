@@ -27,33 +27,29 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 **A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
 
 ## Windows 10/11 (WSL1)
-WSL1 is the preferred terminal to build **pokefirered**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
+WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
 - If WSL (Debian or Ubuntu) is **not installed**, then go to [Installing WSL1](#Installing-WSL1).
 - Otherwise, if WSL is installed, but it **hasn't previously been set up for another decompilation project**, then go to [Setting up WSL1](#Setting-up-WSL1).
-- Otherwise, **open WSL** and go to [Choosing where to store pokefirered (WSL1)](#Choosing-where-to-store-pokefirered-WSL1).
+- Otherwise, **open WSL** and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-WSL1).
 
 ### Installing WSL1
-1. Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
+1. Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following commands (Right Click or Shift+Insert is paste in the Powershell).
 
     ```powershell
-    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+	wsl --install -d Ubuntu --enable-wsl1
     ```
 
 2. Once the process finishes, restart your machine.
 
-3. The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice.
+3. Open Windows Powershell **as Administrator** again (after restarting), and run the following command to configure Ubuntu to use WSL1.
+
+    ```powershell
+    wsl --set-version Ubuntu 1
+    ```
     <details>
-        <summary><i>Note for advanced users...</i></summary>
+        <summary><i>Note...</i></summary>
 
-   >   You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested.
-    </details>
-
-4. Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution.
-    <details>
-        <summary><i>Notes...</i></summary>
-
-   >   Note 1: If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.  
-   >   Note 2: If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
+    >   WSL may open automatically after restarting, but you can ignore it for now.
     </details>
 
 ### Setting up WSL1
@@ -68,7 +64,7 @@ Some tips before proceeding:
     <details>
         <summary><i>Note...</i></summary>
 
-   >   When typing in the password, there will be no visible response, but the terminal will still read in input.
+    >   When typing in the password, there will be no visible response, but the terminal will still read in input.
     </details>
 
 3. Update WSL/Ubuntu before continuing. Do this by running the following command. These commands will likely take a long time to finish:
@@ -77,9 +73,9 @@ Some tips before proceeding:
     sudo apt update && sudo apt upgrade
     ```
 
-> Note: If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokefirered/blob/b7a6240/INSTALL.md)**, then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md) from here.
+> Note: If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**, then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md) from here.
 
-4. Certain packages are required to build pokefirered. Install these packages by running the following command:
+4. Certain packages are required to build pokeemerald. Install these packages by running the following command:
 
     ```bash
     sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
@@ -87,7 +83,7 @@ Some tips before proceeding:
     <details>
         <summary><i>Note...</i></summary>
 
-   >   If the above command does not work, try the above command but replacing `apt` with `apt-get`.
+    >   If the above command does not work, try the above command but replacing `apt` with `apt-get`.
     </details>
 
 ### Choosing where to store pokefirered (WSL1)
